@@ -289,13 +289,11 @@ function M.search(opts, ctx)
   opts.args = {
     opts.path or ".",
     "-type", "f", -- include directories
-    "-name", ".*",
-    "-o",
-    "-name",
-    "*",
     "-not",
-    "-path",
-    "*/.git/*",
+    "(",
+    "-path", "*/.git/*",
+    "-o",
+    "-path", "*/.*/*",
   }
   opts.dirs = { ctx.filter.cwd }
   ctx.picker.list:set_target()
