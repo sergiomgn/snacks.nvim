@@ -287,7 +287,7 @@ function M.search(opts, ctx)
   opts.cwd = ctx.filter.cwd
   opts.notify = false
   opts.args = {
-    ".",
+    opts.path or ".",
     "-type", "f", -- include directories
     "-name", ".*",
     "-o",
@@ -296,7 +296,6 @@ function M.search(opts, ctx)
     "-not",
     "-path",
     "*/.git/*",
-    opts.path or ".",
   }
   opts.dirs = { ctx.filter.cwd }
   ctx.picker.list:set_target()
