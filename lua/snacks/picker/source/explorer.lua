@@ -283,14 +283,19 @@ end
 ---@type snacks.picker.finder
 function M.search(opts, ctx)
   opts = Snacks.picker.util.shallow_copy(opts)
-  opts.cmd = "rg"
+  opts.cmd = "find"
   opts.cwd = ctx.filter.cwd
   opts.notify = false
   opts.args = {
-    "--files",
-    "--hidden", -- include directories
-    "--glob",
-    "!git",
+    ".",
+    "-type", "f", -- include directories
+    "-name", ".*",
+    "-o",
+    "-name",
+    "*",
+    "-not",
+    "-path",
+    "*/.git/*",
     opts.path or ".",
   }
   opts.dirs = { ctx.filter.cwd }
